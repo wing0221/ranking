@@ -6,13 +6,14 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class UserEntity {
-    private int user_id;
+    // private int user_id;
     private String login_id;
     private String user_name;
     private String password;
+    private String password_ready;
     private String email;
     private String profile;
     private String profile_img;
-    private String created_at;
-    private String updated_at;
+    // private String created_at;
+    // private String updated_at;
 }

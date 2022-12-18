@@ -1,12 +1,13 @@
 package com.springproject01.demo.web.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springproject01.demo.user.UserService;
@@ -27,8 +28,20 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String UserNew() {
+    public String UserNew(@ModelAttribute UserForm userForm) {
         return "/user/new";
+    }
+
+    // UserFormを受け取る
+    @PostMapping
+    public String UserCreate(@Validated UserForm userForm, BindingResult error, Model model) {
+        if (error.hasErrors()) {
+            return UserNew(userForm);
+        } else {
+            userService.create(userForm.getLogin_id(), userForm.getUser_name(), userForm.getEmail(),
+                    userForm.getPassword());
+            return "redirect:/";
+        }
     }
 
     // ユーザ詳細ページ表示

@@ -7,9 +7,6 @@
 <body>
     <h1 class="mt-3">ユーザ一覧</h1>
     <ul>
-    <li>
-        <a href="/user/new.html" th:href="@{/user/new}">ユーザ登録</a>
-    </li>
         <li th:text="${Users}">(user)</li>
         <li>
             <a href="/user/detail.html" th:href="@{/user/1}">ユーザ詳細</a>
